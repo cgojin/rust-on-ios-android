@@ -21,3 +21,14 @@ nm -gU target/debug/libmath.a
 ```sh
 cargo run --example hello
 ```
+
+## Calling Rust code from C
+
+```sh
+make c
+
+# or manual building
+cc -g -o target/hello.o -c examples/hello.c
+cc -g -o target/hello-c target/hello.o target/debug/libmath.a
+target/hello-c
+```
