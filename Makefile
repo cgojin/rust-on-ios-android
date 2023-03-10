@@ -1,9 +1,10 @@
 .PHONY: all
 
-all: rust c
+all: rust c swift
 
 # for debug
 CC += -g
+SWIFTC = swiftc -g
 
 # rust
 rust: target/debug/examples/hello
@@ -27,6 +28,14 @@ target/hello-c: target/hello.o target/debug/libmath.a
 
 target/hello.o: examples/hello.c target
 	$(CC) -o $@ -c $<
+
+
+# swift
+swift: target/hello-swift
+	target/hello-swift
+
+target/hello-swift: examples/hello.swift src/lib.h target/debug/libmath.a
+	$(SWIFTC) examples/hello.swift -o target/hello-swift -import-objc-header src/lib.h -Ltarget/debug -lmath
 
 
 # make `target` directory

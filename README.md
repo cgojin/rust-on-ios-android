@@ -32,3 +32,13 @@ cc -g -o target/hello.o -c examples/hello.c
 cc -g -o target/hello-c target/hello.o target/debug/libmath.a
 target/hello-c
 ```
+
+## Calling Rust code from Swift
+
+```sh
+make swift
+
+# or manual building
+swiftc -g examples/hello.swift -o target/hello-swift -import-objc-header src/lib.h -Ltarget/debug -lmath
+target/hello-swift
+```
