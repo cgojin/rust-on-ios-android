@@ -7,3 +7,9 @@ Run rust code on iOS/Android example.
 ```sh
 cargo build --lib
 ```
+
+## Calling Rust code from Rust
+
+```sh
+cargo run --example hello
+```
