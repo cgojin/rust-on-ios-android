@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var sum: Int32 = 0
+
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Text(String(sum))
+
+            Button(action: {
+                sum = add(sum, 1)
+            }, label: {
+                Text("Call Rust")
+            })
         }
         .padding()
     }

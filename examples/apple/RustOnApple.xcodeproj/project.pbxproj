@@ -11,6 +11,7 @@
 		286B0EE229BC20FA00D0A4BE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 286B0EE129BC20FA00D0A4BE /* ContentView.swift */; };
 		286B0EE429BC20FB00D0A4BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286B0EE329BC20FB00D0A4BE /* Assets.xcassets */; };
 		286B0EE829BC20FB00D0A4BE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 286B0EE729BC20FB00D0A4BE /* Preview Assets.xcassets */; };
+		286B0EF129BC27C100D0A4BE /* libmath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 286B0EF029BC27C100D0A4BE /* libmath.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,8 @@
 		286B0EE329BC20FB00D0A4BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		286B0EE529BC20FB00D0A4BE /* RustOnApple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RustOnApple.entitlements; sourceTree = "<group>"; };
 		286B0EE729BC20FB00D0A4BE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		286B0EEE29BC227D00D0A4BE /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		286B0EF029BC27C100D0A4BE /* libmath.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmath.a; path = ../../target/debug/libmath.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				286B0EF129BC27C100D0A4BE /* libmath.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +42,7 @@
 			children = (
 				286B0EDE29BC20FA00D0A4BE /* RustOnApple */,
 				286B0EDD29BC20FA00D0A4BE /* Products */,
+				286B0EEF29BC27C100D0A4BE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +59,7 @@
 			children = (
 				286B0EDF29BC20FA00D0A4BE /* RustOnAppleApp.swift */,
 				286B0EE129BC20FA00D0A4BE /* ContentView.swift */,
+				286B0EEE29BC227D00D0A4BE /* BridgingHeader.h */,
 				286B0EE329BC20FB00D0A4BE /* Assets.xcassets */,
 				286B0EE529BC20FB00D0A4BE /* RustOnApple.entitlements */,
 				286B0EE629BC20FB00D0A4BE /* Preview Content */,
@@ -67,6 +73,14 @@
 				286B0EE729BC20FB00D0A4BE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		286B0EEF29BC27C100D0A4BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				286B0EF029BC27C100D0A4BE /* libmath.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,16 +293,22 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "../../target/aarch64-apple-ios/debug";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=arm64]" = "../../target/aarch64-apple-ios-sim/debug";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=x86_64]" = "../../target/x86_64-apple-ios/debug";
+				"LIBRARY_SEARCH_PATHS[sdk=macosx*][arch=arm64]" = "../../target/aarch64-apple-darwin/debug";
+				"LIBRARY_SEARCH_PATHS[sdk=macosx*][arch=x86_64]" = "../../target/x86_64-apple-darwin";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gongjin.RustOnApple;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = RustOnApple/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -317,16 +337,22 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "../../target/aarch64-apple-ios/release";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=arm64]" = "../../target/aarch64-apple-ios-sim/release";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*][arch=x86_64]" = "../../target/x86_64-apple-ios/release";
+				"LIBRARY_SEARCH_PATHS[sdk=macosx*][arch=arm64]" = "../../target/aarch64-apple-darwin/release";
+				"LIBRARY_SEARCH_PATHS[sdk=macosx*][arch=x86_64]" = "../../target/x86_64-apple-darwin/release";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gongjin.RustOnApple;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = RustOnApple/BridgingHeader.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -1,6 +1,6 @@
 # rust-on-ios-android
 
-Run rust code on iOS/Android example.
+Running Rust code on Android/iOS/macOS example, calling Rust code from C/Swift example.
 
 ## Building library
 
@@ -42,3 +42,41 @@ make swift
 swiftc -g examples/hello.swift -o target/hello-swift -import-objc-header src/lib.h -Ltarget/debug -lmath
 target/hello-swift
 ```
+
+## Running Rust code on iOS/macOS
+
+### Building library
+
+```sh
+# Add iOS/macOS rust toolchain first
+rustup target add aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios aarch64-apple-darwin x86_64-apple-darwin
+
+# building library
+make apple
+
+# or manual building library
+cargo build --lib --target aarch64-apple-ios --target aarch64-apple-ios-sim --target x86_64-apple-ios --target aarch64-apple-darwin --target x86_64-apple-darwin
+```
+
+### iOS Porject Settings
+
+Open `examples/apple/RustOnApple.xcodeproj`, and change/check the target `RustOnApple` settings:
+
+1. Set Objective-C bridging header
+
+    TARGETS -> RustOnApple -> Build Settings -> Objective-C Bridging Header,
+    Set `RustOnApple/BridgingHeader.h`
+
+2. Link the library
+
+    TARGETS -> RustOnApple -> Build Phases -> Link Binary With Libraries,
+    Add the `libmath.a`, 
+
+3. Add library paths
+
+    TARGETS -> RustOnApple -> Build Settings -> Library Search Paths,
+    Add paths of libmath.a for each architecture, such as iOS device is  `../../target/aarch64-apple-ios/debug`
+
+### Rust breakpoint in Xcode
+
+Install [rust-xcode-plugin](https://github.com/cgojin/rust-xcode-plugin) for Rust breakpoint debugging in Xcode.

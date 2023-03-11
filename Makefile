@@ -38,6 +38,13 @@ target/hello-swift: examples/hello.swift src/lib.h target/debug/libmath.a
 	$(SWIFTC) examples/hello.swift -o target/hello-swift -import-objc-header src/lib.h -Ltarget/debug -lmath
 
 
+# ios/mac
+ios: apple
+mac: apple
+apple: src/lib.rs Cargo.toml
+	cargo build --lib --target aarch64-apple-ios --target aarch64-apple-ios-sim --target x86_64-apple-ios --target aarch64-apple-darwin --target x86_64-apple-darwin
+
+
 # make `target` directory
 target:
 	mkdir -p $@
