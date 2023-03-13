@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RustOnAndroid</string>
+    <string name="call_rust">Call Rust</string>
 </resources>

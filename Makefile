@@ -45,6 +45,11 @@ apple: src/lib.rs Cargo.toml
 	cargo build --lib --target aarch64-apple-ios --target aarch64-apple-ios-sim --target x86_64-apple-ios --target aarch64-apple-darwin --target x86_64-apple-darwin
 
 
+# android
+android: src/lib.rs Cargo.toml
+	cargo build --target aarch64-linux-android --target armv7-linux-androideabi 
+
+
 # make `target` directory
 target:
 	mkdir -p $@

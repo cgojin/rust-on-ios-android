@@ -40,8 +40,28 @@ find_library( # Sets the name of the path variable.
 # can link multiple libraries, such as libraries you define in this
 # build script, prebuilt third-party libraries, or system libraries.
 
+include_directories(${PROJECT_SOURCE_DIR}/../../../../../../src)
+
+if (${CMAKE_ANDROID_ARCH_ABI} STREQUAL "arm64-v8a")
+        set(RUST_TARGET "aarch64-linux-android")
+elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "armeabi-v7a")
+        set(RUST_TARGET "armv7-linux-androideabi")
+elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "x86_64")
+        set(RUST_TARGET "x86_64-linux-android")
+elseif(${CMAKE_ANDROID_ARCH_ABI} STREQUAL "x86")
+        set(RUST_TARGET "i686-linux-android")
+endif()
+
+set(RUST_LIB ${PROJECT_SOURCE_DIR}/../../../../../../target/${RUST_TARGET}/debug/libmath.a)
+
+message(${RUST_TARGET})
+message(${RUST_LIB})
+
+
 target_link_libraries( # Specifies the target library.
         rustonandroid
+
+        ${RUST_LIB}
 
         # Links the target library to the log library
         # included in the NDK.
