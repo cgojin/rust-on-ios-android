@@ -2,9 +2,14 @@
 
 Running Rust code on Android/iOS/macOS example, calling Rust code from C/Swift example.
 
-## Building library
+[中文](README.zh_CN.md)
+
+## Building host library
 
 ```sh
+make rust
+
+# or manual build
 cargo build --lib
 
 # Check exporting symbols of rlib
@@ -27,7 +32,7 @@ cargo run --example hello
 ```sh
 make c
 
-# or manual building
+# or manual build
 cc -g -o target/hello.o -c examples/hello.c
 cc -g -o target/hello-c target/hello.o target/debug/libmath.a
 target/hello-c
@@ -38,27 +43,27 @@ target/hello-c
 ```sh
 make swift
 
-# or manual building
+# or manual build
 swiftc -g examples/hello.swift -o target/hello-swift -import-objc-header src/lib.h -Ltarget/debug -lmath
 target/hello-swift
 ```
 
 ## Running Rust code on iOS/macOS
 
-### Building library
+### Building iOS/macOS library
 
 ```sh
 # Add iOS/macOS rust toolchain first
 rustup target add aarch64-apple-ios aarch64-apple-ios-sim x86_64-apple-ios aarch64-apple-darwin x86_64-apple-darwin
 
-# building library
+# Build iOS/macOS library
 make apple
 
-# or manual building library
+# or manual build library
 cargo build --lib --target aarch64-apple-ios --target aarch64-apple-ios-sim --target x86_64-apple-ios --target aarch64-apple-darwin --target x86_64-apple-darwin
 ```
 
-### iOS Porject Settings
+### Xcode Porject Settings
 
 Open `examples/apple/RustOnApple.xcodeproj`, and change/check the target `RustOnApple` settings:
 
@@ -70,14 +75,14 @@ Open `examples/apple/RustOnApple.xcodeproj`, and change/check the target `RustOn
 2. Link the library
 
     TARGETS -> RustOnApple -> Build Phases -> Link Binary With Libraries,
-    Add the `libmath.a`, 
+    Add the `libmath.a`
 
 3. Add library paths
 
     TARGETS -> RustOnApple -> Build Settings -> Library Search Paths,
     Add paths of libmath.a for each architecture, such as iOS device is  `../../target/aarch64-apple-ios/debug`
 
-### Rust breakpoint in Xcode
+### Rust breakpoint debugging in Xcode
 
 Install [rust-xcode-plugin](https://github.com/cgojin/rust-xcode-plugin) for Rust breakpoint debugging in Xcode.
 
@@ -106,10 +111,10 @@ cd examples/android
 
 ### Rust breakpoint debugging in Android Studio
 
-1. Open the project in [Android Studio](https://developer.android.com/studio).
-2. Set a breakpoint in native-lib.cpp.
+1. Open [examples/android](examples/android) project in [Android Studio](https://developer.android.com/studio).
+2. Set a breakpoint in [native-lib.cpp](examples/android/app/src/main/cpp/native-lib.cpp#L22).
 3. Run app with Debug mode.
-4. When running to the cpp breakpoint, it will display the `LLDB` view, and you can set some breakpoints on the `lldb` command line:
+4. When running to the [native-lib.cpp](examples/android/app/src/main/cpp/native-lib.cpp#L22) breakpoint , it will display the `LLDB` view, and you can set some breakpoints on the `lldb` command line:
 
 ```sh
 # breakpoint at `add` method
