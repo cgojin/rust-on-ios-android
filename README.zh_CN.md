@@ -63,7 +63,7 @@ cargo build --lib --target aarch64-apple-ios --target aarch64-apple-ios-sim --ta
 
 ### Xcode 项目配置
 
-打开 `examples/apple/RustOnApple.xcodeproj`, 然后检查或修改 `RustOnApple` 目标的配置:
+在 Xcode 中打开 [examples/apple/RustOnApple.xcodeproj](examples/apple/RustOnApple.xcodeproj), 然后检查或修改 `RustOnApple` 目标的配置:
 
 1. 设置 Objective-C 桥接头文件
 

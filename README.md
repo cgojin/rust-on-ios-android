@@ -65,7 +65,7 @@ cargo build --lib --target aarch64-apple-ios --target aarch64-apple-ios-sim --ta
 
 ### Xcode Porject Settings
 
-Open `examples/apple/RustOnApple.xcodeproj`, and change/check the target `RustOnApple` settings:
+Open [examples/apple/RustOnApple.xcodeproj](examples/apple/RustOnApple.xcodeproj) in Xcode, and change/check the target `RustOnApple` settings:
 
 1. Set Objective-C bridging header
 
